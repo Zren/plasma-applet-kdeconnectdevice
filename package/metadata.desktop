@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=KDE Connect Device Widget
+Comment=Drag and Drop to share links to a device. Displays device battery info.
+
+Type=Service
+Icon=kdeconnect
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-KDE-PluginInfo-Author=Chris Holland
+X-KDE-PluginInfo-Email=zrenfire@gmail.com
+X-KDE-PluginInfo-Name=com.github.zren.kdeconnectdevice
+X-KDE-PluginInfo-Version=1
+X-KDE-PluginInfo-Website=https://github.com/Zren/plasma-applet-kdeconnectdevice
+X-KDE-PluginInfo-KdeStoreId=1234
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
