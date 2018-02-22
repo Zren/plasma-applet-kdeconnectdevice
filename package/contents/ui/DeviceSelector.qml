@@ -8,7 +8,12 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import "./Utils.js" as Utils
 
 ListView {
-	RadioButton {
+	implicitHeight: contentHeight
+
+	property color textColor: theme.textColor
+	property color iconBackgroundColor: "transparent"
+
+	PlasmaComponents.RadioButton {
 		id: radioButtonSizer
 		visible: false
 	}
@@ -21,6 +26,7 @@ ListView {
 		anchors.left: parent.left
 		anchors.right: parent.right
 
+		checked: model.deviceId == plasmoid.configuration.deviceId
 		exclusiveGroup: pairedDeviceGroup
 
 		property var deviceIconName: Utils.parseIconName(model.iconName)
@@ -31,18 +37,26 @@ ListView {
 			anchors.right: parent.right
 			anchors.leftMargin: radioButtonSizer.width
 
-			PlasmaCore.IconItem {
+			Rectangle {
 				Layout.preferredWidth: radioButtonSizer.width
 				Layout.preferredHeight: radioButtonSizer.width
-				source: deviceSelectorDelegate.deviceIconName
+				color: iconBackgroundColor
+				radius: 4 * units.devicePixelRatio
+
+				PlasmaCore.IconItem {
+					anchors.fill: parent
+					source: deviceSelectorDelegate.deviceIconName
+				}
 			}
 			
 			PlasmaComponents.Label {
 				text: model.display
+				color: textColor
 			}
 			PlasmaComponents.Label {
 				text: model.deviceId
 				opacity: 0.6
+				color: textColor
 			}
 			Item { Layout.fillWidth: true }
 		}

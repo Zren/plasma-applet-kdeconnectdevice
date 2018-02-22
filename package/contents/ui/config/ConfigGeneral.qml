@@ -19,6 +19,8 @@ ConfigPage {
 		DeviceSelector {
 			id: deviceSelector
 			anchors.fill: parent
+			textColor: syspal.textColor
+			iconBackgroundColor: theme.backgroundColor
 		}
 	}
 }
