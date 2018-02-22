@@ -42,7 +42,10 @@ Item {
 			y: -offset
 			width: badgeRect.width + offset * 2
 			height: badgeRect.height + offset * 2
-			radius: width
+			radius: badgeRect.radius + offset * 2
+
+			// Badge changes width based on number.
+			onWidthChanged: maskShaderSource.scheduleUpdate()
 		}
 	}
 
@@ -77,7 +80,8 @@ Item {
 	Rectangle {
 		id: badgeRect
 		x: Qt.application.layoutDirection === Qt.RightToLeft ? iconWidthDelta : parent.width - width - iconWidthDelta
-		width: height
+		// width: height
+		width: Math.max(height, Math.round(badgeLabel.contentWidth + radius/2))
 		height: Math.round(parent.height * overlay.heightRatio)
 		color: overlay.backgroundColor
 		radius: width

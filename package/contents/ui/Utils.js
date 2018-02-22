@@ -25,3 +25,7 @@ function parseIconName(iconName) {
 	}
 	return iconName
 }
+
+function setAlpha(c, a) {
+	return Qt.rgba(c.r, c.g, c.b, a)
+}
