@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
+import "Utils.js" as Utils
+
 MouseArea {
 	readonly property bool inPanel: (plasmoid.location == PlasmaCore.Types.TopEdge
 		|| plasmoid.location == PlasmaCore.Types.RightEdge

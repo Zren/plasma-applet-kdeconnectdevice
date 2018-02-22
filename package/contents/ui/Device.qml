@@ -29,7 +29,6 @@ Item {
 			var device = pairedDevicesModel.getDevice(i)
 			console.log(i, device, device.id(), device.type, device.name)
 			if (device.id() == currentDevice.deviceId) {
-				console.log('currentDevice.device == device')
 				currentDevice.device = null // Trigger deviceLoader.active = false
 				currentDevice.device = device
 				return
@@ -41,6 +40,11 @@ Item {
 		target: currentDevice
 		onDeviceIdChanged: currentDevice.updateDevice()
 	}
+	Connections {
+		target: pairedDevicesModel
+		onRowsChanged: currentDevice.updateDevice()
+	}
+	Component.onCompleted: currentDevice.updateDevice()
 
 	property var battery: deviceLoader.item ? deviceLoader.item.battery : null
 	property bool batteryAvailable: battery ? battery.available : false
