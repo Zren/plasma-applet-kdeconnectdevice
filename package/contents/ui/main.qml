@@ -10,6 +10,7 @@ import "./lib"
 Item {
 	id: main
 
+	AppletConfig { id: appletConfig }
 	ExecUtil { id: executable }
 
 	KDEConnect.DevicesModel {

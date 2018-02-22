@@ -51,6 +51,7 @@ Item {
 	property bool batteryCharging: battery ? battery.charging : false
 	property int batteryCharge: battery ? battery.charge : 0
 	property string batteryDisplayString: battery ? battery.displayString : i18n("No info")
+	property bool isLowBattery: battery && batteryCharge <= plasmoid.configuration.lowBatteryPercent
 
 	// onDeviceChanged: console.log('Device.device', device)
 	// onDeviceIdChanged: console.log('Device.deviceId', deviceId)

@@ -46,6 +46,8 @@ MouseArea {
 		text: currentDevice.batteryCharge
 		visible: currentDevice.batteryAvailable && !dropArea.containsDrag
 		heightRatio: 0.5
+		backgroundColor: currentDevice.isLowBattery ? appletConfig.lowBatteryBackgroundColor : theme.highlightColor
+		textColor: currentDevice.isLowBattery ? appletConfig.lowBatteryTextColor : theme.backgroundColor
 	}
 
 	onClicked: plasmoid.expanded = !plasmoid.expanded
