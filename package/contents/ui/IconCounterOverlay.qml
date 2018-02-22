@@ -45,11 +45,12 @@ Item {
 			radius: badgeRect.radius + offset * 2
 
 			// Badge changes width based on number.
-			onWidthChanged: maskShaderSource.scheduleUpdate()
+			onWidthChanged: shaderEffect.mask.scheduleUpdate()
 		}
 	}
 
 	ShaderEffect {
+		id: shaderEffect
 		anchors.fill: parent
 		property var source: ShaderEffectSource {
 			sourceItem: icon
