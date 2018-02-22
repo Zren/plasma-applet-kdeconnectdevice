@@ -27,10 +27,12 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 Item {
 	id: overlay
 	readonly property int iconWidthDelta: (icon.width - icon.paintedWidth) / 2
+	readonly property int iconHeightDelta: (icon.height - icon.paintedHeight) / 2
 	property alias text: badgeLabel.text
 	property color backgroundColor: theme.highlightColor
 	property color textColor: theme.backgroundColor
 	property real heightRatio: 0.4
+	property real radius: 3 * units.devicePixelRatio
 
 	Item {
 		id: badgeMask
@@ -38,11 +40,11 @@ Item {
 
 		Rectangle {
 			readonly property int offset: Math.round(Math.max(units.smallSpacing / 2, badgeMask.width / 32))
-			x: Qt.application.layoutDirection === Qt.RightToLeft ? -offset + iconWidthDelta : parent.width - width + offset - iconWidthDelta
-			y: -offset
+			x: parent.width - width + offset
+			y: parent.height - height + offset
 			width: badgeRect.width + offset * 2
 			height: badgeRect.height + offset * 2
-			radius: badgeRect.radius + offset * 2
+			radius: overlay.radius
 
 			// Badge changes width based on number.
 			onWidthChanged: shaderEffect.mask.scheduleUpdate()
@@ -80,23 +82,23 @@ Item {
 
 	Rectangle {
 		id: badgeRect
-		x: Qt.application.layoutDirection === Qt.RightToLeft ? iconWidthDelta : parent.width - width - iconWidthDelta
-		// width: height
-		width: Math.max(height, Math.round(badgeLabel.contentWidth + radius/2))
-		height: Math.round(parent.height * overlay.heightRatio)
+		x: parent.width - width
+		y: parent.height - height
+		width: badgeLabel.paintedWidth + overlay.radius*1.5
+		height: badgeLabel.font.pixelSize
 		color: overlay.backgroundColor
-		radius: width
+		radius: overlay.radius
 
 		PlasmaComponents.Label {
 			id: badgeLabel
 			anchors.centerIn: parent
-			width: height
+			width: Math.round(parent.width)
 			height: Math.round(parent.height)
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			fontSizeMode: Text.Fit
 			font.pointSize: -1
-			font.pixelSize: 1024
+			font.pixelSize: Math.round(12 * units.devicePixelRatio)
 			minimumPixelSize: 5
 			color: overlay.textColor
 			font.weight: Font.Black
