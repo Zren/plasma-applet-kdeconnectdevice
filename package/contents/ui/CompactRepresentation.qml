@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.draganddrop 2.0 as DragAndDrop
 
 MouseArea {
 	readonly property bool inPanel: (plasmoid.location == PlasmaCore.Types.TopEdge
@@ -50,54 +49,36 @@ MouseArea {
 	onClicked: plasmoid.expanded = !plasmoid.expanded
 
 
-	DragAndDrop.DropArea {
+	DropArea {
 		id: dropArea
 		anchors.fill: parent
 
-		preventStealing: true
+		// org.kde.plasma.quickshare
+		function objectToArray(object) {
+			var array = [];
+			for(var v in object) {
+				// toString() here too because sometimes the contents are non-string (eg QUrl)
+				array.push(object[v].toString());
+			}
+			return array;
+		}
 
-		function parseUrl(event) {
-			if (event && event.mimeData && event.mimeData.url) {
-				return event.mimeData.url.toString()
-			} else {
-				return ""
+		onEntered: {
+			if (drag.hasUrls) {
+				var urls = objectToArray(drag.urls)
+				drag.accepted = true
 			}
 		}
-		function dragTick(eventType, event) {
-			console.log(eventType, event.x, event.y)
-			var url = parseUrl(event)
-			if (url) {
-				console.log('\t' + url)
-			}
-		}
-		onDragEnter: {
-			dragTick('onDragEnter', event)
-			console.log('\t', event.proposedAction, event.possibleActions)
-			if (parseUrl(event) && event.proposedAction == Qt.CopyAction) {
-				event.accept(event.proposedAction)
-			} else {
-				event.ignore()
-			}
-		}
-		onDragMove: {
-			dragTick('onDragMove', event)
-			console.log('\t', event.proposedAction, event.possibleActions)
-			if (parseUrl(event) && event.proposedAction == Qt.CopyAction) {
-				event.accept(event.proposedAction)
-			} else {
-				event.ignore()
-			}
-		}
-		onDragLeave: dragTick('onDragLeave', event)
-		onDrop: {
-			dragTick('onDrop', event)
-			var url = parseUrl(event)
-			if (url) {
-				console.log('device', device)
-				device.share(url)
-			}
 
-			// console.log('\t', JSON.stringify(event.mimeData, null, '\t'))
+		onDropped: {
+			if (drop.hasUrls) {
+				var urls = objectToArray(drop.urls)
+				for (var i = 0; i < urls.length; i++) {
+					var url = urls[i]
+					device.share(url)
+				}
+				drop.accepted = true
+			}
 		}
 	}
 }
