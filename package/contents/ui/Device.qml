@@ -30,8 +30,8 @@ Item {
 			console.log(i, device, device.id(), device.type, device.name)
 			if (device.id() == currentDevice.deviceId) {
 				console.log('currentDevice.device == device')
+				currentDevice.device = null // Trigger deviceLoader.active = false
 				currentDevice.device = device
-				// battery.device = device
 				return
 			}
 		}
