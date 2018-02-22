@@ -18,12 +18,12 @@ Item {
 	}
 
 	Device {
-		id: device
+		id: currentDevice
 	}
 
-	Plasmoid.icon: device.icon || "kdeconnect"
-	Plasmoid.toolTipMainText: device.deviceName || i18n("KDE Connect Device")
-	Plasmoid.toolTipSubText: device.deviceId ? i18n("Drag and drop to send a link to device") : i18n("Please select device")
+	Plasmoid.icon: currentDevice.icon || "kdeconnect"
+	Plasmoid.toolTipMainText: currentDevice.deviceName || i18n("KDE Connect Device")
+	Plasmoid.toolTipSubText: currentDevice.deviceId ? i18n("Drag and drop to send a link to device") : i18n("Please select device")
 
 	Plasmoid.compactRepresentation: CompactRepresentation {}
 

@@ -39,12 +39,12 @@ MouseArea {
 		source: dropArea.containsDrag ? "emblem-shared-symbolic" : plasmoid.icon
 	}
 
-	// IconCounterOverlay {
-	// 	anchors.fill: parent
-	// 	text: noteItem.incompleteCount
-	// 	visible: noteItem.incompleteCount > 0
-	// 	heightRatio: 0.5
-	// }
+	IconCounterOverlay {
+		anchors.fill: parent
+		text: currentDevice.batteryCharge
+		visible: currentDevice.batteryAvailable
+		heightRatio: 0.5
+	}
 
 	onClicked: plasmoid.expanded = !plasmoid.expanded
 
@@ -75,7 +75,7 @@ MouseArea {
 				var urls = objectToArray(drop.urls)
 				for (var i = 0; i < urls.length; i++) {
 					var url = urls[i]
-					device.share(url)
+					currentDevice.share(url)
 				}
 				drop.accepted = true
 			}
