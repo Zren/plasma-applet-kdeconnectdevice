@@ -23,6 +23,9 @@ function parseIconName(iconName) {
 			iconName = iconName.substr(0, iconName.length - status.length)
 		}
 	}
+	if (iconName == "laptop") {
+		iconName = "computer-laptop"
+	}
 	return iconName
 }
 

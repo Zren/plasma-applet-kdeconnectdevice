@@ -65,4 +65,14 @@ ConfigPage {
 			}
 		}
 	}
+
+	ConfigSection {
+		title: i18n("Icon")
+
+		ConfigIcon {
+			configKey: 'userDeviceIcon'
+			previewIconSize: units.iconSizes.large
+			defaultValue: plasmoid.configuration.deviceIcon || "kdeconnect"
+		}
+	}
 }

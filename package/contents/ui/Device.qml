@@ -5,7 +5,7 @@ Item {
 	id: currentDevice
 	property string deviceId: plasmoid.configuration.deviceId
 	property string deviceName: plasmoid.configuration.deviceName
-	property string icon: plasmoid.configuration.deviceIcon
+	property string icon: plasmoid.configuration.userDeviceIcon || plasmoid.configuration.deviceIcon
 
 	property var device: null
 
