@@ -84,24 +84,26 @@ Item {
 		id: badgeRect
 		x: parent.width - width
 		y: parent.height - height
-		width: badgeLabel.paintedWidth + overlay.radius*1.5
-		height: badgeLabel.font.pixelSize
+		width: badgeLabel.width + overlay.radius
+		height: badgeLabel.font.pixelSize + overlay.radius
 		color: overlay.backgroundColor
 		radius: overlay.radius
 
 		PlasmaComponents.Label {
 			id: badgeLabel
 			anchors.centerIn: parent
-			width: Math.round(parent.width)
+			width: paintedWidth
 			height: Math.round(parent.height)
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
-			fontSizeMode: Text.Fit
+			// fontSizeMode: Text.Fit
 			font.pointSize: -1
-			font.pixelSize: Math.round(12 * units.devicePixelRatio)
+			font.pixelSize: Math.round(10 * units.devicePixelRatio)
 			minimumPixelSize: 5
 			color: overlay.textColor
 			font.weight: Font.Black
+			// font.bold: true
+			// font.family: "Noto Mono"
 		}
 	}
 }
