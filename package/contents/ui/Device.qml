@@ -47,7 +47,7 @@ Item {
 	Component.onCompleted: currentDevice.updateDevice()
 
 	property var battery: deviceLoader.item ? deviceLoader.item.battery : null
-	property bool batteryAvailable: battery ? battery.available : false
+	property bool batteryAvailable: battery && battery.charge >= 0 ? battery.available : false
 	property bool batteryCharging: battery ? battery.charging : false
 	property int batteryCharge: battery ? battery.charge : 0
 	property string batteryDisplayString: battery ? battery.displayString : i18n("No info")
