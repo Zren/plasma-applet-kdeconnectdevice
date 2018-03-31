@@ -43,6 +43,7 @@ MouseArea {
 
 	IconCounterOverlay {
 		anchors.fill: parent
+		iconItem: icon
 		text: currentDevice.batteryCharge
 		visible: currentDevice.batteryAvailable && !dropArea.containsDrag
 		heightRatio: 0.5

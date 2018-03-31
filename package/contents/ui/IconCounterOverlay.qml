@@ -26,8 +26,9 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
 	id: overlay
-	readonly property int iconWidthDelta: (icon.width - icon.paintedWidth) / 2
-	readonly property int iconHeightDelta: (icon.height - icon.paintedHeight) / 2
+	property var iconItem
+	readonly property int iconWidthDelta: (iconItem.width - iconItem.paintedWidth) / 2
+	readonly property int iconHeightDelta: (iconItem.height - iconItem.paintedHeight) / 2
 	property alias text: badgeLabel.text
 	property color backgroundColor: theme.highlightColor
 	property color textColor: theme.backgroundColor
@@ -55,7 +56,7 @@ Item {
 		id: shaderEffect
 		anchors.fill: parent
 		property var source: ShaderEffectSource {
-			sourceItem: icon
+			sourceItem: iconItem
 			hideSource: overlay.visible
 		}
 		property var mask: ShaderEffectSource {
