@@ -34,10 +34,14 @@ Item {
 	property color textColor: theme.backgroundColor
 	property real heightRatio: 0.4
 	property real radius: 3 * units.devicePixelRatio
+	readonly property int minSize: Math.min(width, height)
+	property int minMaskSize: 24 * units.devicePixelRatio
+	property bool useMask: minSize >= minMaskSize
 
 	Item {
 		id: badgeMask
 		anchors.fill: parent
+		visible: overlay.useMask
 
 		Rectangle {
 			readonly property int offset: Math.round(Math.max(units.smallSpacing / 2, badgeMask.width / 32))
@@ -55,9 +59,11 @@ Item {
 	ShaderEffect {
 		id: shaderEffect
 		anchors.fill: parent
+		visible: overlay.useMask
+
 		property var source: ShaderEffectSource {
 			sourceItem: iconItem
-			hideSource: overlay.visible
+			hideSource: overlay.visible && overlay.useMask
 		}
 		property var mask: ShaderEffectSource {
 			sourceItem: badgeMask
@@ -87,7 +93,7 @@ Item {
 		y: parent.height - height
 		width: badgeLabel.width + overlay.radius
 		height: badgeLabel.font.pixelSize + overlay.radius
-		color: overlay.backgroundColor
+		color: overlay.useMask ? overlay.backgroundColor : "transparent"
 		radius: overlay.radius
 
 		PlasmaComponents.Label {
@@ -101,7 +107,9 @@ Item {
 			font.pointSize: -1
 			font.pixelSize: Math.round(10 * units.devicePixelRatio)
 			minimumPixelSize: 5
-			color: overlay.textColor
+			color: overlay.useMask ? overlay.textColor : overlay.backgroundColor
+			style: overlay.useMask ? Text.Normal : Text.Outline
+			styleColor: overlay.textColor
 			font.weight: Font.Black
 			// font.bold: true
 			// font.family: "Noto Mono"
