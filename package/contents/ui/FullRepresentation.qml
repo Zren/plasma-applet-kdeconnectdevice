@@ -17,6 +17,12 @@ FocusScope {
 
 	property bool isDesktopContainment: false
 
+	Loader {
+		anchors.fill: parent
+		active: !plasmoid.configuration.deviceId
+		source: "DeviceSelector.qml"
+	}
+
 	PlasmaComponents.ToolButton {
 		id: pinButton
 		anchors.top: parent.top
@@ -29,11 +35,4 @@ FocusScope {
 		visible: !isDesktopContainment
 	}
 
-	Loader {
-		anchors.fill: parent
-		active: !plasmoid.configuration.deviceId
-		source: "DeviceSelector.qml"
-	}
-
-	
 }
