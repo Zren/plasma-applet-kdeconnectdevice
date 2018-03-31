@@ -35,6 +35,24 @@ MouseArea {
 	Layout.maximumWidth: inPanel ? units.iconSizeHints.panel : -1
 	Layout.maximumHeight: inPanel ? units.iconSizeHints.panel : -1
 
+	// property int testSize: 20
+	// Layout.minimumWidth: testSize
+	// Layout.minimumHeight: testSize
+	// Layout.preferredWidth: Layout.minimumWidth
+	// Layout.preferredHeight: Layout.minimumHeight
+	// Layout.maximumWidth: Layout.minimumWidth
+	// Layout.maximumHeight: Layout.minimumHeight
+
+	// Timer {
+	// 	repeat: true
+	// 	running: true
+	// 	interval: 2000
+	// 	onTriggered: {
+	// 		parent.testSize += 2
+	// 		console.log('testSize: ' + parent.testSize + 'px')
+	// 	}
+	// }
+
 	PlasmaCore.IconItem {
 		id: icon
 		anchors.fill: parent
