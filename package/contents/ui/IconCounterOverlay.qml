@@ -35,7 +35,7 @@ Item {
 	property real heightRatio: 0.4
 	property real radius: 3 * units.devicePixelRatio
 	readonly property int minSize: Math.min(width, height)
-	property int minMaskSize: 24 * units.devicePixelRatio
+	property int minMaskSize: 28 * units.devicePixelRatio
 	property bool useMask: minSize >= minMaskSize
 
 	Item {
