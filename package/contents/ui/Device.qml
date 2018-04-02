@@ -27,7 +27,7 @@ Item {
 	function updateDevice() {
 		for (var i = 0; i < pairedDevicesModel.count; i++) {
 			var device = pairedDevicesModel.getDevice(i)
-			console.log(i, device, device.id(), device.type, device.name)
+			// console.log(i, device, device.id(), device.type, device.name)
 			if (device.id() == currentDevice.deviceId) {
 				currentDevice.device = null // Trigger deviceLoader.active = false
 				currentDevice.device = device
