@@ -76,32 +76,40 @@ MouseArea {
 		id: dropArea
 		anchors.fill: parent
 
-		// org.kde.plasma.quickshare
-		function objectToArray(object) {
-			var array = [];
+		function parseUrls(object) {
+			var array = []
 			for(var v in object) {
 				// toString() here too because sometimes the contents are non-string (eg QUrl)
-				array.push(object[v].toString());
+				var url = object[v].toString()
+				if (array.indexOf(url) === -1) {
+					array.push(url)
+				}
 			}
-			return array;
+			return array
 		}
 
 		onEntered: {
 			if (drag.hasUrls) {
-				var urls = objectToArray(drag.urls)
+				var urls = parseUrls(drag.urls)
 				drag.accepted = true
 			}
 		}
 
 		onDropped: {
 			if (drop.hasUrls) {
-				var urls = objectToArray(drop.urls)
-				for (var i = 0; i < urls.length; i++) {
-					var url = urls[i]
-					currentDevice.share(url)
-				}
+				var urls = parseUrls(drop.urls)
+				currentDevice.shareUrlList(urls)
 				drop.accepted = true
 			}
+		}
+
+		PlasmaCore.ToolTipArea {
+			id: dropAreaToolTip
+			anchors.fill: parent
+			location: plasmoid.location
+			active: true
+			mainText: i18nd("plasma_applet_org.kde.kdeconnect", "File Transfer")
+			subText: i18nd("plasma_applet_org.kde.kdeconnect", "Drop a file to transfer it onto your phone.")
 		}
 	}
 }

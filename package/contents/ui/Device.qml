@@ -13,12 +13,9 @@ Item {
 		id: deviceComponent
 
 		Item {
-			property var battery: Battery {
-				device: currentDevice.device
-			}
-			property var sms: SMS {
-				device: currentDevice.device
-			}
+			property var battery: Battery { device: currentDevice.device }
+			property var share: Share { device: currentDevice.device }
+			property var sms: SMS { device: currentDevice.device }
 		}
 	}
 	Loader {
@@ -67,26 +64,21 @@ Item {
 	// onBatteryDisplayStringChanged: console.log('batteryDisplayString', batteryDisplayString)
 
 	//---
-	function share(url) {
-		console.log('share', url)
-		if (deviceId && url) {
-			var cmd = "kdeconnect-cli -d " + executable.wrap(deviceId) + " --share " + executable.wrap(url)
-			console.log('exec', cmd)
-			executable.exec(cmd, function(cmd, exitCode, exitStatus, stdout, stderr) {
-				console.log('execCallback', cmd)
-				console.log('\t', exitCode)
-				console.log('\t', exitStatus)
-				console.log('\t', stdout)
-				console.log('\t', stderr)
+	property var share: deviceLoader.item ? deviceLoader.item.share : null
+	function shareUrl(url) {
+		if (!share) {
+			return
+		}
+		share.plugin.shareUrl(url)
+	}
+	function shareUrlList(urls) {
+		if (!share) {
+			return
+		}
+		// share.plugin.shareUrls(urls) // Doesn't work.
 
-				if (exitCode == 0) {
-					// sucess
-				} else {
-					// TODO: error
-				}
-			})
-		} else {
-			// TODO: error
+		for (var i = 0; i < urls.length; i++) {
+			shareUrl(urls[i])
 		}
 	}
 
