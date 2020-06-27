@@ -29,7 +29,7 @@ Item {
 	Plasmoid.compactRepresentation: CompactRepresentation {}
 
 	Plasmoid.fullRepresentation: FullRepresentation {
-		Plasmoid.backgroundHints: isDesktopContainment ? PlasmaCore.Types.NoBackground : PlasmaCore.Types.DefaultBackground
+		Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground | PlasmaCore.Types.ConfigurableBackground
 		isDesktopContainment: plasmoid.location == PlasmaCore.Types.Floating
 	}
 
