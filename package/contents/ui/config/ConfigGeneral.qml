@@ -23,7 +23,7 @@ ConfigPage {
 	AppletConfig { id: appletConfig }
 	SystemPalette { id: syspal }
 
-	ConfigSection {
+	ConfigGroupBox {
 		title: i18n("Select Device")
 		DeviceSelector {
 			id: deviceSelector
@@ -34,7 +34,7 @@ ConfigPage {
 	}
 
 
-	ConfigSection {
+	ConfigGroupBox {
 		RowLayout {
 			Rectangle {
 				Layout.preferredWidth: radioButtonSizer.width
@@ -66,7 +66,7 @@ ConfigPage {
 		}
 	}
 
-	ConfigSection {
+	ConfigGroupBox {
 		title: i18n("Icon")
 
 		ConfigIcon {
