@@ -15,7 +15,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import QtQuick 2.1
@@ -25,7 +25,7 @@ import org.kde.kdeconnect 1.0
 
 QtObject {
 	id: root
-	
+
 	property alias device: checker.device
 	readonly property alias available: checker.available
 
@@ -36,7 +36,17 @@ QtObject {
 
 	property bool charging: false
 	property int charge: -1
-	property string displayString: (available && charge > -1) ? ((charging) ? (i18n("Charging: %1%", charge)) : (i18n("Discharging: %1%", charge))) : i18n("No info")
+	property string displayString: {
+		if (available && charge > -1) {
+			if (charging) {
+				return i18nd("plasma_applet_org.kde.kdeconnect", "%1% charging", charge)
+			} else {
+				return i18nd("plasma_applet_org.kde.kdeconnect", "%1%", charge)
+			}
+		} else {
+			return i18nd("plasma_applet_org.kde.kdeconnect", "No info")
+		}
+	}
 	property variant battery: null
 
 	property variant nested1: DBusAsyncResponse {
