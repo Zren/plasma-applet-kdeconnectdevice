@@ -1,9 +1,9 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.1
+import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import "./Utils.js" as Utils
 
@@ -13,24 +13,26 @@ ListView {
 	property color textColor: theme.textColor
 	property color iconBackgroundColor: "transparent"
 
-	PlasmaComponents.RadioButton {
+	PlasmaComponents3.RadioButton {
 		id: radioButtonSizer
 		visible: false
 	}
-	ExclusiveGroup { id: pairedDeviceGroup }
 
 	model: pairedDevicesModel
-	delegate: RadioButton {
+
+	QQC2.ButtonGroup { id: pairedDeviceGroup }
+
+	delegate: PlasmaComponents3.RadioButton {
 		id: deviceSelectorDelegate
 
 		anchors.left: parent.left
 		anchors.right: parent.right
 
+		QQC2.ButtonGroup.group: pairedDeviceGroup
+
 		checked: model.deviceId == plasmoid.configuration.deviceId
-		exclusiveGroup: pairedDeviceGroup
 
 		property var deviceIconName: Utils.parseIconName(model.iconName)
-		
 
 		RowLayout {
 			anchors.left: parent.left
@@ -49,11 +51,11 @@ ListView {
 				}
 			}
 			
-			PlasmaComponents.Label {
+			PlasmaComponents3.Label {
 				text: model.display
 				color: textColor
 			}
-			PlasmaComponents.Label {
+			PlasmaComponents3.Label {
 				text: model.deviceId
 				opacity: 0.6
 				color: textColor
@@ -62,8 +64,6 @@ ListView {
 		}
 
 		onClicked: {
-			console.log('clicked', model.display)
-
 			plasmoid.configuration.deviceId = model.deviceId
 			plasmoid.configuration.deviceName = model.display
 			plasmoid.configuration.deviceIcon = deviceSelectorDelegate.deviceIconName

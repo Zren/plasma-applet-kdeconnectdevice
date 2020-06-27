@@ -1,8 +1,8 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import org.kde.kdeconnect 1.0 as KDEConnect
 import ".."
@@ -16,7 +16,7 @@ ConfigPage {
 		id: pairedDevicesModel
 		displayFilter: KDEConnect.DevicesModel.Paired
 	}
-	PlasmaComponents.RadioButton {
+	PlasmaComponents3.RadioButton {
 		id: radioButtonSizer
 		visible: false
 	}
