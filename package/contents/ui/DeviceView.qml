@@ -42,7 +42,10 @@ PlasmaComponents3.Page {
 
 		Column {
 			PlasmaComponents3.Button {
-				text: i18n("SMS")
+				visible: !!currentDevice.sms && currentDevice.sms.available
+				text: i18nd("plasma_applet_org.kde.kdeconnect", "SMS Messages")
+				icon.name: "message-new"
+				onClicked: currentDevice.openSms()
 			}
 		}
 	}

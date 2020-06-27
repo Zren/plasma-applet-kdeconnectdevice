@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import "kdeconnect"
+import "./kdeconnect"
 
 Item {
 	id: currentDevice
@@ -14,6 +14,9 @@ Item {
 
 		Item {
 			property var battery: Battery {
+				device: currentDevice.device
+			}
+			property var sms: SMS {
 				device: currentDevice.device
 			}
 		}
@@ -46,6 +49,7 @@ Item {
 	}
 	Component.onCompleted: currentDevice.updateDevice()
 
+	//---
 	property var battery: deviceLoader.item ? deviceLoader.item.battery : null
 	property bool batteryAvailable: battery && battery.charge >= 0 ? battery.available : false
 	property bool batteryCharging: battery ? battery.charging : false
@@ -62,8 +66,7 @@ Item {
 	// onBatteryChargeChanged: console.log('batteryCharge', batteryCharge)
 	// onBatteryDisplayStringChanged: console.log('batteryDisplayString', batteryDisplayString)
 
-
-
+	//---
 	function share(url) {
 		console.log('share', url)
 		if (deviceId && url) {
@@ -85,5 +88,15 @@ Item {
 		} else {
 			// TODO: error
 		}
+	}
+
+	//---
+	property var sms: deviceLoader.item ? deviceLoader.item.sms : null
+
+	function openSms() {
+		if (!sms) {
+			return
+		}
+		sms.plugin.launchApp()
 	}
 }
