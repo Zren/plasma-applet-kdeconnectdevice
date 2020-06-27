@@ -72,7 +72,7 @@ ConfigPage {
 		ConfigIcon {
 			configKey: 'userDeviceIcon'
 			previewIconSize: units.iconSizes.large
-			defaultValue: plasmoid.configuration.deviceIcon || "kdeconnect"
+			placeholderValue: plasmoid.configuration.deviceIcon || "kdeconnect"
 		}
 	}
 }
