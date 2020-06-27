@@ -19,20 +19,7 @@ FocusScope {
 
 	Loader {
 		anchors.fill: parent
-		active: !plasmoid.configuration.deviceId
-		source: "DeviceSelector.qml"
-	}
-
-	PlasmaComponents.ToolButton {
-		id: pinButton
-		anchors.top: parent.top
-		anchors.right: parent.right
-		width: Math.round(units.gridUnit * 1.25)
-		height: width
-		checkable: true
-		iconSource: "window-pin"
-		onCheckedChanged: plasmoid.hideOnWindowDeactivate = !checked
-		visible: !isDesktopContainment
+		source: plasmoid.configuration.deviceId ? "DeviceView.qml" : "DeviceSelector.qml"
 	}
 
 }
